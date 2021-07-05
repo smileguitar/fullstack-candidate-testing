@@ -59,17 +59,17 @@ const ListArea = () => {
           )}
         </div>
       </div>
-      {data.isLoading &&
+      {data.isLoading > 0 &&
         <div className="w-full h-32 flex items-center justify-center">
           <Spinner />
         </div>
       }
-      {!data.isLoading && data?.sortedData?.map((hospital, index) =>
+      {data.isLoading === 0 && data?.sortedData?.map((hospital, index) =>
         <div key={`${index}-${hospital.name}`}>
           <ListItem hospitalData={hospital}/>
         </div>
       )}
-      {!data.isLoading && data?.sortedData.length===0 &&
+      {data.isLoading === 0 && data?.sortedData.length===0 &&
         <p className="text-center my-12">No result found!</p>
       }
     </Card>

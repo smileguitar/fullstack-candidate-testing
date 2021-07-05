@@ -19,9 +19,9 @@ const DataContextProvider = ({
     experience: []
   })
   const [data, setData] = React.useState({
-    isLoading: true,
+    isLoading: 0,
     data: null,
-    sortedData: null,
+    sortedData: [],
     error: null
   })
   const [sortOption, setSortOption] = React.useState({
@@ -118,13 +118,13 @@ const DataContextProvider = ({
   }, [sortOption])
 
   const fetchData = React.useCallback(() => {
+    setData(pre => ({
+      ...pre,
+      isLoading: pre.isLoading + 1,
+    }))
     controller?.abort()
     const newController = new AbortController();
     setController(newController)
-    setData(pre => ({
-      ...pre,
-      isLoading: true,
-    }))
     fetch(`${SERVER_ENDPOINT}/jobs`, {
       method: 'POST',
       signal: newController.signal,
@@ -138,20 +138,20 @@ const DataContextProvider = ({
     })
     .then(async res => {
       const jobsData = await res.json()
-      setData({
-        isLoading: false,
+      setData(pre => ({
+        isLoading: pre.isLoading - 1,
         data: jobsData.jobs,
         sortedData: sortData(cloneDeep(jobsData.jobs)),
         error: null
-      })
+      }))
     })
     .catch(() => {
-      setData({
-        isLoading: false,
+      setData(pre => ({
+        isLoading: pre.isLoading - 1,
         data: null,
-        sortedData: null,
+        sortedData: [],
         error: "Network Issue!"
-      })
+      }))
     })
   }, [controller, searchText, setController, setData, sortData])
 
