@@ -48,7 +48,7 @@ git clone https://github.com/GalloDaSballo/nextjs-magic-eslint-jest
 ```bash
 yarn
 ```
-
+copy .env.example to .env
 
 ## Start
 
