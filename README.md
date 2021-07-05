@@ -53,6 +53,7 @@ yarn
 /**
     # API URL
     NEXT_PUBLIC_SERVER_ENDPOINT=http://localhost:3000/api
+
 */
 
 ## Start
