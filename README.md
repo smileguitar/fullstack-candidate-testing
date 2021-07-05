@@ -45,10 +45,15 @@ git clone https://github.com/GalloDaSballo/nextjs-magic-eslint-jest
 
 ## Install
 
+1. Run yarn in application root folder.
 ```bash
 yarn
 ```
-copy .env.example to .env
+2. insert .env file in application root folder.
+/**
+  # API URL
+  NEXT_PUBLIC_SERVER_ENDPOINT=http://localhost:3000/api
+ */
 
 ## Start
 
